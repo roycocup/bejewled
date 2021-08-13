@@ -3,7 +3,7 @@ extends Node2D
 const SIZE = 64
 const BORDER = 10
 var piece_space = SIZE + BORDER
-signal piece_clicked
+signal piece_clicked(id)
 var piece_id: String
 
 func _ready():
@@ -27,8 +27,8 @@ func _input(event):
 		var origin = transform.get_origin()
 		var r = Rect2(origin.x, origin.y, SIZE, SIZE).has_point(event.position)
 		if r:
-			emit_signal("piece_clicked")
-			print (piece_id, event.position)
+			emit_signal("piece_clicked", piece_id)
+#			print (piece_id, event.position)
 		
 		
 

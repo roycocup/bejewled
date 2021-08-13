@@ -32,4 +32,3 @@ func populate_grid():
 			piece.set_id(str(j.row)+"-"+str(j.col))
 			piece.set_position(pos)
 			add_child(piece)
-
