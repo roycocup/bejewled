@@ -49,10 +49,22 @@ func _on_piece_clicked(id):
 			handle_two_touches()
 
 func handle_two_touches():
-	reset_touches()
 	swap()
+	reset_touches()
 func swap():
-	print(grid)
+	var fc = str(first_touch).split('-')
+	var fcol = int(fc[0])
+	var frow = int(fc[1])
+	var first_piece = grid[fcol][frow].piece
+	
+	var sc = str(second_touch).split('-')
+	var scol = int(sc[0])
+	var srow = int(sc[1])
+	var second_piece = grid[scol][srow].piece
+	
+	first_piece.set_position(Vector2())
+	second_piece.set_position(Vector2())
+	
 	# var tween = get_node("Tween")
 	# tween.interpolate_property($Node2D, "position",
 	# 		Vector2(), Vector2(100, 100), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
