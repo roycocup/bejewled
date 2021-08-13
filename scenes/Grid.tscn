@@ -6,7 +6,7 @@
 [node name="Grid" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 margin_left = 4.0
 margin_right = 844.0
 margin_bottom = 840.0

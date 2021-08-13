@@ -15,3 +15,14 @@ func get_random_piece():
 	randomize()
 	var s = (randi() % 4) -1
 	return pieces[s]
+	
+func _input(event):
+	if event.is_action_released("ui_select"):
+		var start = transform.get_origin()
+		var end = Vector2(start.x + SIZE, start.y + SIZE)
+		var r = Rect2(start, end).has_point(event.position)
+		if r:
+			print (transform.get_origin())
+		
+		
+
