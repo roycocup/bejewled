@@ -29,6 +29,7 @@ func populate_grid():
 			var x = (j.row * piece.piece_space) + hOffset
 			var y = (j.col * piece.piece_space) + vOffset
 			var pos = Vector2(x, y)
+			piece.set_id(str(j.row)+"-"+str(j.col))
 			piece.set_position(pos)
 			add_child(piece)
 
