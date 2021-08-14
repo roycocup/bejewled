@@ -49,9 +49,23 @@ func _on_piece_clicked(id):
 			handle_two_touches()
 
 func handle_two_touches():
-	swap()
+	var pieces = get_pieces()
+	swap(pieces[0], pieces[1])
+	# logic
+	# if success then reassign pieces to grid
+	wait(3)
+	swap(pieces[0], pieces[1])
 	reset_touches()
-func swap():
+
+func wait(secs):
+	var t = Timer.new()
+	t.set_wait_time(secs)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	t.queue_free()
+func get_pieces():
 	var fc = str(first_touch).split('-')
 	var fcol = int(fc[0])
 	var frow = int(fc[1])
@@ -61,15 +75,20 @@ func swap():
 	var scol = int(sc[0])
 	var srow = int(sc[1])
 	var second_piece = grid[scol][srow].piece
+	return [first_piece, second_piece]
+
+func swap(first_piece, second_piece):
+	var ftween = first_piece.get_node("Tween")
+	var stween = second_piece.get_node("Tween")
+	ftween.interpolate_property(
+		first_piece, "position", first_piece.position, second_piece.position, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	stween.interpolate_property(
+		second_piece, "position", second_piece.position, first_piece.position, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
-	first_piece.set_position(Vector2())
-	second_piece.set_position(Vector2())
+	ftween.start()
+	stween.start()
 	
-	# var tween = get_node("Tween")
-	# tween.interpolate_property($Node2D, "position",
-	# 		Vector2(), Vector2(100, 100), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	# tween.start()
-	pass
+	
 
 	
 	
